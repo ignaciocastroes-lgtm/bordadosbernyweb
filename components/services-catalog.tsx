@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Building2, FileCode2, GraduationCap, MessageCircle, Recycle } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { WA_MESSAGES, whatsappLink } from '@/lib/links'
 import { TiltCard } from '@/components/tilt-card'
+import { ServicePatch } from '@/components/service-patch'
 
 type Category = 'escolar' | 'circular' | 'b2b' | 'matrices'
 
@@ -15,6 +17,10 @@ type Service = {
   title: string
   text: string
   tag: string
+  /** Real product photo for cards with authentic material — omit to fall
+   *  back to the branded ServicePatch illustration (every card still gets
+   *  a professional header either way, never a bare icon-on-white). */
+  photo?: string
 }
 
 const CATEGORIES: { id: Category; label: string; short: string; icon: LucideIcon; anchor?: string }[] = [
@@ -31,10 +37,10 @@ const SERVICES: Service[] = [
   { category: 'circular', title: 'Reparación profesional', text: 'Bastas, cierres, parches y zurcidos hechos por manos expertas.', tag: 'Comercio justo' },
   { category: 'circular', title: 'Red de costureras mayores', text: 'Cada arreglo genera ingresos para costureras de Villa El Abrazo.', tag: 'Impacto social' },
   { category: 'circular', title: 'Upcycling de prendas', text: 'Dale una segunda vida a tu ropa con bordados y transformaciones.', tag: 'Circular' },
-  { category: 'b2b', title: 'Equipamiento deportivo', text: 'Camisetas, buzos y bolsos con escudo y numeración para tu club.', tag: 'Por volumen' },
+  { category: 'b2b', title: 'Equipamiento deportivo', text: 'Camisetas, buzos y bolsos con escudo y numeración para tu club.', tag: 'Por volumen', photo: '/images/llavero-lo-espejo.jpg' },
   { category: 'b2b', title: 'Uniformes corporativos', text: 'Logo bordado en poleras, camisas y chaquetas para tu equipo.', tag: 'Con factura' },
-  { category: 'b2b', title: 'Merchandising bordado', text: 'Gorros, parches y llaveros NFC con tu marca para eventos.', tag: 'Pymes' },
-  { category: 'matrices', title: 'Digitalización a medida', text: 'Convertimos tu logo en una matriz lista para bordar en tu máquina.', tag: '.pes / .dst' },
+  { category: 'b2b', title: 'Merchandising bordado', text: 'Gorros, parches y llaveros NFC con tu marca para eventos.', tag: 'Pymes', photo: '/images/llavero-qr-cafe.jpg' },
+  { category: 'matrices', title: 'Digitalización a medida', text: 'Convertimos tu logo en una matriz lista para bordar en tu máquina.', tag: '.pes / .dst', photo: '/images/matriz-pes.jpg' },
   { category: 'matrices', title: 'Catálogo descargable', text: 'Compra matrices listas en la WebApp y descárgalas al instante.', tag: 'Descarga inmediata' },
   { category: 'matrices', title: 'Ajuste de densidad', text: 'Optimizamos puntadas según tela: piqué, jersey, gabardina o toalla.', tag: 'Todo Chile' },
 ]
@@ -75,9 +81,9 @@ export function ServicesCatalog() {
           <span key={c.id} id={c.anchor} className="block scroll-mt-28" aria-hidden="true" />
         ))}
 
-        <motion.ul layout className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+        <motion.ul layout className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
           <AnimatePresence mode="popLayout">
-            {visible.map((service) => {
+            {visible.map((service, index) => {
               const cat = CATEGORIES.find((c) => c.id === service.category)!
               const Icon = cat.icon
               return (
@@ -89,32 +95,59 @@ export function ServicesCatalog() {
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <TiltCard className="h-full">
-                    <div className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-forest/10">
-                      <div className="flex items-center justify-between">
-                        <span className="stitch-light flex size-11 items-center justify-center rounded-full text-primary">
-                          <Icon className="size-5" aria-hidden="true" />
-                        </span>
-                        <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
-                          {service.tag}
-                        </span>
+                  {/* Scroll-triggered cascade entrance — independent of the
+                      filter-change animation above. Fires once per card the
+                      first time it scrolls into view, staggered by index so
+                      the grid "builds itself" rather than popping in at once. */}
+                  <motion.div
+                    className="h-full"
+                    initial={{ opacity: 0, y: 28, scale: 0.97 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: Math.min(index * 0.07, 0.42), ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <TiltCard className="h-full">
+                      <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-xl hover:shadow-forest/10">
+                        {/* Header media: real photo when we have one, branded
+                            patch illustration otherwise — every card gets a
+                            professional visual, never a bare icon-on-white. */}
+                        <div className="relative h-36 w-full shrink-0 overflow-hidden bg-forest">
+                          {service.photo ? (
+                            <Image
+                              src={service.photo}
+                              alt={service.title}
+                              fill
+                              sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+                              className="object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-full w-full items-center justify-center">
+                              <ServicePatch icon={Icon} className="h-24 w-24" />
+                            </div>
+                          )}
+                          <span className="absolute right-3 top-3 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                            {service.tag}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-1 flex-col gap-1.5 p-6 pt-5">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-gold">{cat.short}</p>
+                          <h3 className="font-serif text-xl font-semibold text-forest">{service.title}</h3>
+                          <p className="text-sm leading-relaxed text-muted-foreground">{service.text}</p>
+                        </div>
+
+                        <a
+                          href={whatsappLink(WA_MESSAGES[service.category])}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 border-t border-dashed border-border px-6 py-4 text-sm font-semibold text-primary transition-colors hover:text-accent"
+                        >
+                          <MessageCircle className="size-4" aria-hidden="true" />
+                          Cotizar por WhatsApp
+                        </a>
                       </div>
-                      <div className="flex flex-1 flex-col gap-1.5">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-gold">{cat.short}</p>
-                        <h3 className="font-serif text-xl font-semibold text-forest">{service.title}</h3>
-                        <p className="text-sm leading-relaxed text-muted-foreground">{service.text}</p>
-                      </div>
-                      <a
-                        href={whatsappLink(WA_MESSAGES[service.category])}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border-t border-dashed border-border pt-4 text-sm font-semibold text-primary transition-colors hover:text-accent"
-                      >
-                        <MessageCircle className="size-4" aria-hidden="true" />
-                        Cotizar por WhatsApp
-                      </a>
-                    </div>
-                  </TiltCard>
+                    </TiltCard>
+                  </motion.div>
                 </motion.li>
               )
             })}

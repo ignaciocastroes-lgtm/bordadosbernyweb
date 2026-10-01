@@ -34,9 +34,10 @@ export function TiltCard({ children, className }: { children: React.ReactNode; c
   // Sheen position follows the cursor (0%..100% within the card)
   const sheenX = useTransform(mx, [-0.5, 0.5], ['0%', '100%'])
   const sheenY = useTransform(my, [-0.5, 0.5], ['0%', '100%'])
-  const sheenBackground = useTransform([sheenX, sheenY], ([x, y]: [string, string]) =>
-    `radial-gradient(360px circle at ${x} ${y}, rgba(212,175,55,0.16), transparent 55%)`,
-  )
+  const sheenBackground = useTransform([sheenX, sheenY], (latest: string[]) => {
+    const [x, y] = latest
+    return `radial-gradient(360px circle at ${x} ${y}, rgba(212,175,55,0.16), transparent 55%)`
+  })
 
   const prefersReducedMotion =
     typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches

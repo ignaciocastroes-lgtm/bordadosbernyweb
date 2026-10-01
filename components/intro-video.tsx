@@ -15,7 +15,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 const SESSION_KEY = 'bb_intro_seen'
-const FALLBACK_MS = 8200 // slightly longer than the 8.0s clip as a safety net
+const FALLBACK_MS = 8000 // clip is 7.8s — safety net in case `ended` doesn't fire
 
 export function IntroVideo() {
   const [visible, setVisible] = useState(false)
