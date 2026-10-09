@@ -11,7 +11,7 @@ const _jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Bordados Berny | Taller Textil 4.0 en Maipú',
   description:
-    'Bordados personalizados, llaveros con chip NFC, matrices digitales .pes para todo Chile y clínica de ropa circular. Cotiza 24/7 en nuestra WebApp. Villa El Abrazo, Maipú.',
+    'Bordados personalizados, llaveros con chip NFC, matrices digitales .pes para todo Chile, uniformes por volumen para clubes y empresas, y clínica de ropa circular. Cotiza 24/7 en nuestra WebApp. Villa El Abrazo, Maipú.',
   generator: 'v0.app',
   icons: {
     icon: [

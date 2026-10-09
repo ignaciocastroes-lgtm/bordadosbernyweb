@@ -23,10 +23,10 @@ type Service = {
   photo?: string
 }
 
-const CATEGORIES: { id: Category; label: string; short: string; icon: LucideIcon; anchor?: string }[] = [
+const CATEGORIES: { id: Category; label: string; short: string; icon: LucideIcon }[] = [
   { id: 'escolar', label: 'Comunidad Escolar', short: 'B2C Maipú', icon: GraduationCap },
-  { id: 'circular', label: 'Clínica de Ropa Circular', short: 'Villa El Abrazo', icon: Recycle, anchor: 'circular' },
-  { id: 'b2b', label: 'Clubes, Colegios y Pymes', short: 'B2B con factura', icon: Building2, anchor: 'empresas' },
+  { id: 'circular', label: 'Clínica de Ropa Circular', short: 'Villa El Abrazo', icon: Recycle },
+  { id: 'b2b', label: 'Clubes, Colegios y Pymes', short: 'B2B con factura', icon: Building2 },
   { id: 'matrices', label: 'Matrices Digitales (.pes)', short: 'Todo Chile', icon: FileCode2 },
 ]
 
@@ -76,10 +76,6 @@ export function ServicesCatalog() {
             </FilterButton>
           ))}
         </div>
-
-        {CATEGORIES.filter((c) => c.anchor).map((c) => (
-          <span key={c.id} id={c.anchor} className="block scroll-mt-28" aria-hidden="true" />
-        ))}
 
         <motion.ul layout className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
           <AnimatePresence mode="popLayout">

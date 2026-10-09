@@ -1,15 +1,10 @@
-import { HandHeart, Recycle, Scissors } from 'lucide-react'
+import { HandHeart, Scissors } from 'lucide-react'
 
 const PILLARS = [
   {
     icon: HandHeart,
     title: 'Comercio Justo',
     text: 'Trabajamos con costureras mayores de Villa El Abrazo, con pago justo y horarios que respetan su ritmo.',
-  },
-  {
-    icon: Recycle,
-    title: 'Economía Circular',
-    text: 'Upcycling de prendas, reparación antes que reemplazo y donación de conos de hilo a talleres comunitarios.',
   },
   {
     icon: Scissors,
@@ -33,7 +28,7 @@ export function ImpactSection() {
               comunidad de Maipú.
             </p>
           </div>
-          <ul className="grid gap-4 md:grid-cols-3 lg:col-span-8">
+          <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
             {PILLARS.map(({ icon: Icon, title, text }) => (
               <li key={title} className="stitch flex flex-col gap-4 rounded-2xl bg-card p-6">
                 <Icon className="size-7 text-primary" aria-hidden="true" />

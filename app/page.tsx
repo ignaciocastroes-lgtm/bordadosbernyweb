@@ -3,6 +3,8 @@ import { Hero } from '@/components/hero'
 import { NfcSection } from '@/components/nfc-section'
 import { ServicesCatalog } from '@/components/services-catalog'
 import { PesGallery } from '@/components/pes-gallery'
+import { CircularSection } from '@/components/circular-section'
+import { CompaniesClubsSection } from '@/components/companies-clubs-section'
 import { HowItWorks } from '@/components/how-it-works'
 import { ImpactSection } from '@/components/impact-section'
 import { SiteFooter } from '@/components/site-footer'
@@ -17,6 +19,8 @@ export default function Page() {
         <NfcSection />
         <ServicesCatalog />
         <PesGallery />
+        <CircularSection />
+        <CompaniesClubsSection />
         <HowItWorks />
         <ImpactSection />
       </main>
