@@ -1,7 +1,8 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Plus_Jakarta_Sans } from 'next/font/google'
 import { IntroVideo } from '@/components/intro-video'
+import { CookieConsent } from '@/components/cookie-consent'
+import { AnalyticsGate } from '@/components/analytics-gate'
 import './globals.css'
 
 const _fraunces = Fraunces({ subsets: ['latin'], weight: ['500', '600', '700'] })
@@ -37,7 +38,8 @@ export default function RootLayout({
       <body className="antialiased">
         <IntroVideo />
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <CookieConsent />
+        {process.env.NODE_ENV === 'production' && <AnalyticsGate />}
       </body>
     </html>
   )

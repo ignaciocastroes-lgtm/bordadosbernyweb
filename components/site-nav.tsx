@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: '#app', label: 'App 4.0' },
   { href: '#nfc', label: 'Llaveros NFC' },
   { href: '#servicios', label: 'Servicios' },
+  { href: '#galeria-pes', label: 'Galería .pes' },
   { href: '#circular', label: 'Costura Circular' },
   { href: '#empresas', label: 'Empresas y Clubes' },
 ]

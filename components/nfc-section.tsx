@@ -11,8 +11,20 @@ const LAYERS = [
 const USE_CASES = [
   { icon: Backpack, title: 'SOS Mochilas Escolares', text: 'Datos de contacto del apoderado a un toque.' },
   { icon: Trophy, title: 'Clubes Deportivos', text: 'Escudo del club + ficha del jugador o socio.' },
-  { icon: Dog, title: 'Mascotas Silenciosas', text: 'Placa sin ruido con la info de tu mascota.' },
-  { icon: Briefcase, title: 'Tarjeta Digital Emprendedores', text: 'Tu catálogo, redes y WhatsApp en un llavero.' },
+  {
+    icon: Dog,
+    title: 'Mascotas Silenciosas',
+    text: 'Placa sin ruido con la info de tu mascota.',
+    photo: '/images/llavero-mascota-perro.jpg',
+    photoAlt: 'Llavero NFC azul con silueta de perro para placa de mascota',
+  },
+  {
+    icon: Briefcase,
+    title: 'Tarjeta Digital Emprendedores',
+    text: 'Tu catálogo, redes y WhatsApp en un llavero.',
+    photo: '/images/llavero-menu-simplificado.jpg',
+    photoAlt: 'Llavero NFC bordado para menú digital de negocio',
+  },
 ]
 
 export function NfcSection() {
@@ -89,9 +101,15 @@ export function NfcSection() {
           </div>
 
           <ul className="grid gap-3 sm:grid-cols-2">
-            {USE_CASES.map(({ icon: Icon, title, text }) => (
+            {USE_CASES.map(({ icon: Icon, title, text, photo, photoAlt }) => (
               <li key={title} className="flex items-start gap-3 rounded-2xl bg-forest-foreground/5 p-4">
-                <Icon className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                {photo ? (
+                  <div className="relative size-10 shrink-0 overflow-hidden rounded-lg">
+                    <Image src={photo} alt={photoAlt ?? title} fill sizes="40px" className="object-cover" />
+                  </div>
+                ) : (
+                  <Icon className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                )}
                 <div>
                   <h3 className="text-sm font-semibold">{title}</h3>
                   <p className="text-sm leading-relaxed text-forest-foreground/70">{text}</p>

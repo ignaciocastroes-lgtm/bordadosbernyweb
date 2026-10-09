@@ -1,6 +1,12 @@
+'use client'
+
 import { ArrowUpRight, Award, MapPin, MessageCircle } from 'lucide-react'
 import { LogoBordadosBernyGold } from '@/components/logo-bordados-berny'
 import { APP_URL, WA_MESSAGES, WHATSAPP_DISPLAY, whatsappLink } from '@/lib/links'
+
+function reopenCookieBanner() {
+  window.dispatchEvent(new CustomEvent('bb-cookie-consent-reopen'))
+}
 
 export function SiteFooter() {
   return (
@@ -65,9 +71,17 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-forest-foreground/10">
-        <p className="mx-auto max-w-7xl px-4 py-5 text-xs text-forest-foreground/60 md:px-6">
-          {'© 2026 Bordados Berny · Est. 2026 · Hecho con hilo y código en Maipú.'}
-        </p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-forest-foreground/60 md:flex-row md:items-center md:justify-between md:px-6">
+          <p>{'© 2026 Bordados Berny · Est. 2026 · Hecho con hilo y código en Maipú.'}</p>
+          <div className="flex gap-4">
+            <a href="/politica-de-privacidad" className="underline underline-offset-2 hover:text-forest-foreground/90">
+              Política de Privacidad
+            </a>
+            <button type="button" onClick={reopenCookieBanner} className="underline underline-offset-2 hover:text-forest-foreground/90">
+              Preferencias de cookies
+            </button>
+          </div>
+        </div>
       </div>
     </footer>
   )

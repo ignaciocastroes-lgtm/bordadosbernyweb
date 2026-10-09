@@ -37,12 +37,12 @@ const SERVICES: Service[] = [
   { category: 'circular', title: 'Reparación profesional', text: 'Bastas, cierres, parches y zurcidos hechos por manos expertas.', tag: 'Comercio justo' },
   { category: 'circular', title: 'Red de costureras mayores', text: 'Cada arreglo genera ingresos para costureras de Villa El Abrazo.', tag: 'Impacto social' },
   { category: 'circular', title: 'Upcycling de prendas', text: 'Dale una segunda vida a tu ropa con bordados y transformaciones.', tag: 'Circular' },
-  { category: 'b2b', title: 'Equipamiento deportivo', text: 'Camisetas, buzos y bolsos con escudo y numeración para tu club.', tag: 'Por volumen', photo: '/images/llavero-lo-espejo.jpg' },
-  { category: 'b2b', title: 'Uniformes corporativos', text: 'Logo bordado en poleras, camisas y chaquetas para tu equipo.', tag: 'Con factura' },
+  { category: 'b2b', title: 'Equipamiento deportivo', text: 'Camisetas, buzos y bolsos con escudo y numeración para tu club.', tag: 'Por volumen', photo: '/images/llavero-lo-espejo-amplio.jpg' },
+  { category: 'b2b', title: 'Uniformes corporativos', text: 'Logo bordado en poleras, camisas y chaquetas para tu equipo.', tag: 'Con factura', photo: '/images/llavero-marca-generico.jpg' },
   { category: 'b2b', title: 'Merchandising bordado', text: 'Gorros, parches y llaveros NFC con tu marca para eventos.', tag: 'Pymes', photo: '/images/llavero-qr-cafe.jpg' },
   { category: 'matrices', title: 'Digitalización a medida', text: 'Convertimos tu logo en una matriz lista para bordar en tu máquina.', tag: '.pes / .dst', photo: '/images/matriz-pes.jpg' },
-  { category: 'matrices', title: 'Catálogo descargable', text: 'Compra matrices listas en la WebApp y descárgalas al instante.', tag: 'Descarga inmediata' },
-  { category: 'matrices', title: 'Ajuste de densidad', text: 'Optimizamos puntadas según tela: piqué, jersey, gabardina o toalla.', tag: 'Todo Chile' },
+  { category: 'matrices', title: 'Catálogo descargable', text: 'Compra matrices listas en la WebApp y descárgalas al instante.', tag: 'Descarga inmediata', photo: '/images/pes-digitalizacion-tablet.jpg' },
+  { category: 'matrices', title: 'Ajuste de densidad', text: 'Optimizamos puntadas según tela: piqué, jersey, gabardina o toalla.', tag: 'Todo Chile', photo: '/images/pes-bordadora-maquina.jpg' },
 ]
 
 export function ServicesCatalog() {
